@@ -4,7 +4,7 @@ const db = require('./data/db');
 const server = express();
 server.use(express.json());
 
-const PORT = process.env.port || 6666;
+const PORT = process.env.port || 3333;
 
 
 
@@ -20,7 +20,7 @@ server.get('/', (req, res) => {
 server.post('/users', (req, res) => {
     const userInfo = req.body;
     console.log('Request Body Name', userInfo)
-db.users
+db
 .insert(userInfo)
 .then(user => {
     res.status(201).json({success: true, user});
@@ -33,7 +33,7 @@ db.users
 //GET THE USER ARRAY
 
 server.get('/users', (req,res) => {
-    db.users
+    db
     .find()
     .then(users => {
         if(users){
